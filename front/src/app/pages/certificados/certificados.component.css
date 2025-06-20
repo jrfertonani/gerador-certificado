@@ -21,7 +21,7 @@
 }
 
 .custom-card{
-  width: 672px;
+  max-width: 672px;
   gap: 20px;
   border-radius: 8px;
   border: 1px solid #e2e8f0;
