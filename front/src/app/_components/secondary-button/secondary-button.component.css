@@ -9,7 +9,7 @@
   cursor: pointer;
   gap: 8px;
   display: flex;
-  aling-items: center;
+  align-items: center;
 }
 
 .custom-buttom:hover{
