@@ -60,7 +60,7 @@
         </div>
         }
       </div>
-      <app-secondary-button
+      <app-secondary-button (click)="adicionarAtividade()" [disabled]="atividade.length == 0" textoBotao="Adicionar" phClass="ph ph-plus"
         [ngStyle]="
           campoInvalido(atividadeRef) ? { 'margin-bottom': '24px' } : {}
         "
@@ -81,6 +81,6 @@
         } }
       </div>
     </div>
-    <app-primary-button></app-primary-button>
+    <app-primary-button [disabled]="form.invalid!" textoBotao="Gerar certificado" ></app-primary-button>
   </div>
 </form>

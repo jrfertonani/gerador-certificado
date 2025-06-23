@@ -26,4 +26,7 @@ export class CertificadoFormComponent {
     return control.invalid && control.touched;
   }
 
+  adicionarAtividade(){
+    this.atividades.push(this.atividade);
+  }
 }

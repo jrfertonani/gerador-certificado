@@ -1,4 +1,6 @@
-<button class="custom-buttom">
-  <i class="ph ph-plus"></i>
-  Botão secundario
+<button [ngStyle]="disabled ? {'opacity': '50%'} : {}" class="custom-buttom">
+  @if (phClass) {
+    <i class={{phClass}}></i>
+  }
+  {{textoBotao}}
 </button>
