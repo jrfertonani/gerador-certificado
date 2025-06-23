@@ -15,7 +15,7 @@
         >Nome</label
       >
       <input
-        [(ngModel)]="nome"
+        [(ngModel)]="certificado.nome"
         #nomeRef="ngModel"
         name="nome"
         maxlength="150"
@@ -34,12 +34,7 @@
     </div>
     <div class="mb-3 d-flex align-items-end custom-input-group">
       <div class="flex-grow-1 me-2">
-        <label
-          [ngClass]="{ 'text-danger-label': campoInvalido(atividadeRef) }"
-          for="atividade"
-          class="form-label"
-          >Atividade</label
-        >
+        <label for="atividade" class="form-label">Atividade</label>
         <input
           [(ngModel)]="atividade"
           #atividadeRef="ngModel"
@@ -50,37 +45,34 @@
           type="text"
           class="form-control custom-input"
           placeholder="Atividade exercida"
-
         />
-
-        @if(campoInvalido(atividadeRef) ) {
-        <div class="error-message d-flex align-items-center">
-          <i class="ph ph-warning-circle"></i>
-          <p class="m-0">O nome da atividade é obrigatório</p>
-        </div>
-        }
       </div>
-      <app-secondary-button (click)="adicionarAtividade()" [disabled]="atividade.length == 0" textoBotao="Adicionar" phClass="ph ph-plus"
-        [ngStyle]="
-          campoInvalido(atividadeRef) ? { 'margin-bottom': '24px' } : {}
-        "
+      <app-secondary-button
+        (click)="adicionarAtividade()"
+        [disabled]="!atividade || atividade.length == 0"
+        textoBotao="Adicionar"
+        phClass="ph ph-plus"
       ></app-secondary-button>
     </div>
     <div class="atividade-group">
       <label class="form-label">Lista de atividades</label>
       <div class="item-list w-100">
-        @for (atividade of atividades; track $index) {
+        @for (atividade of certificado.atividades; track $index) {
         <div class="item">
           <span class="item-text">{{ atividade }}</span>
-          <div class="remove-btn">
+          <div (click)="excluirAtividade($index)" class="remove-btn">
             <i class="ph-bold ph-x"></i>
           </div>
         </div>
-        @if ($index +1 != atividades.length) {
+        @if ($index +1 != certificado.atividades.length) {
         <hr />
         } }
       </div>
     </div>
-    <app-primary-button [disabled]="form.invalid!" textoBotao="Gerar certificado" ></app-primary-button>
+    <app-primary-button
+      (click)="submit()"
+      [disabled]="!formValido()"
+      textoBotao="Gerar certificado"
+    ></app-primary-button>
   </div>
 </form>
