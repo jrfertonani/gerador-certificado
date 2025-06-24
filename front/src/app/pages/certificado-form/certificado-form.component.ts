@@ -4,6 +4,7 @@ import { FormsModule, NgModel } from '@angular/forms';
 import { PrimaryButtonComponent } from '../../_components/primary-button/primary-button.component';
 import { SecondaryButtonComponent } from '../../_components/secondary-button/secondary-button.component';
 import { Certificado } from '../../interfaces/certificado';
+import { CertificadoService } from '../../_services/certificado.service';
 
 
 @Component({
@@ -19,10 +20,13 @@ import { Certificado } from '../../interfaces/certificado';
 })
 export class CertificadoFormComponent {
 
+  constructor(private certificadoService: CertificadoService){}
+
 
   certificado: Certificado = {
     atividades: [],
-    nome: ''
+    nome: '',
+    dataEmissao: ''
   };
 
   atividade: string = '';
@@ -46,8 +50,19 @@ export class CertificadoFormComponent {
 
   submit(){
     if(!this.formValido()){
-
+      return;
     }
+    this.certificado.dataEmissao = this.dataAtual();
+    this.certificadoService.adicionarCertificado(this.certificado);
   }
 
+  dataAtual(){
+    const dataAtual = new Date();
+    const dia = String(dataAtual.getDate()).padStart(2, '0');
+    const mes = String(dataAtual.getMonth() + 1).padStart(2, '0');
+    const ano = dataAtual.getFullYear();
+
+    const dataFormatada = `${dia}/${mes}/${ano}`;
+    return dataFormatada;
+  }
 }
