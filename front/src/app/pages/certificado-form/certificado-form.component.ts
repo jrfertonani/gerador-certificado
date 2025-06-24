@@ -6,6 +6,7 @@ import { SecondaryButtonComponent } from '../../_components/secondary-button/sec
 import { Certificado } from '../../interfaces/certificado';
 import { CertificadoService } from '../../_services/certificado.service';
 import { v4 as uuidv4 } from 'uuid';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class CertificadoFormComponent {
 
   @ViewChild('form') form!: NgForm;
 
-  constructor(private certificadoService: CertificadoService){}
+  constructor(private certificadoService: CertificadoService, private router: Router){}
 
 
   certificado: Certificado = {
@@ -63,8 +64,10 @@ export class CertificadoFormComponent {
     this.certificado.id = uuidv4();
     this.certificadoService.adicionarCertificado(this.certificado);
 
-    this.certificado = this.estadoInicialCertificado();
-    this.form.resetForm();
+    this.router.navigate(['certificados', this.certificado.id])
+
+    // this.certificado = this.estadoInicialCertificado();
+    // this.form.resetForm();
 
 
   }
