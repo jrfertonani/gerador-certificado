@@ -12,7 +12,7 @@ export class ItemCertificadoComponent {
 
     @Input() nomeAluno   : string ='';
     @Input() dateEmissao : string ='';
-    @Input() id: number   = 0;
+    @Input() id: string  = '';
 
   constructor(private router: Router){}
 

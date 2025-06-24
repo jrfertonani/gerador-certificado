@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ItemCertificadoComponent } from "../../_components/item-certificado/item-certificado.component";
 import { SecondaryButtonComponent } from "../../_components/secondary-button/secondary-button.component";
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { CertificadoService } from '../../_services/certificado.service';
 import { Certificado } from '../../interfaces/certificado';
 
@@ -16,18 +16,14 @@ import { Certificado } from '../../interfaces/certificado';
 export class CertificadosComponent implements OnInit {
 
   id: string | null = null;
-  certificados: Certificado[] = [];
+  certificados: Certificado [] = [];
 
-  constructor(private certificadoService: CertificadoService, private route: ActivatedRoute){}
+  constructor(private certificadoService: CertificadoService){}
 
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      this.id = params.get('id');
-    })
+      this.certificados = this.certificadoService.certificados;
+    }
 
 
-
-    this.certificados = this.certificadoService.certificados;
-  }
 }
